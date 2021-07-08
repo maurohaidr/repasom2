@@ -1,44 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCountries, addCountryFavorite } from "../../actions/actions";
+import { getCountries, addCountryFavorite, getDetail } from "../../actions/actions";
 import { Link } from "react-router-dom";
 
 function Home(props) {
   return (
     <div>
-      <h1>Home</h1>
-      <button onClick={() => props.getCountries()}>Search Countries</button>
-      <Link to="/favorites">
-        <h1>Favs</h1>
-      </Link>
-      <div>
-        {props.countries &&
-          props.countries.map((el) => {
-            return (
-              <div>
-                <h4>{el.name}</h4>
-
-                <button onClick={() => props.addCountryFavorite(el)}>
-                  Fav
-                </button>
-              </div>
-            );
-          })}
-      </div>
+      <h1>Home</h1>   
+      <Link to="/favs">Favorites</Link>
+      <button onClick={() => props.getCountries()}>Get Countries</button>  
+      {props.countries && props.countries.map(e =>{
+        return (
+          <div>
+              <Link to={`/${e.alpha3Code}`}>
+              <h3>{e.name}</h3>
+              </Link>
+            <button onClick={() => props.addCountryFavorite(e)}>favs</button>
+        </div>
+        )
+      }
+      )}
     </div>
   );
 }
 
 function mapStateToProps(state) {
   return {
-    countries: state.countries,
+    countries:state.countries
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCountries: () => dispatch(getCountries()),
-    addCountryFavorite: (country) => dispatch(addCountryFavorite(country)),
+    addCountryFavorite: id => dispatch(addCountryFavorite(id)),
+    getCountries: () => dispatch(getCountries())
   };
 }
 

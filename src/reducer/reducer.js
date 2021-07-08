@@ -2,11 +2,13 @@ import {
   GET_COUNTRIES,
   ADD_COUNTRY_FAVORITE,
   REMOVE_COUNTRY_FAVORITE,
+  GET_DETAIL,
 } from "../actions/actions";
 
 const initialState = {
   countries: [],
   favorites: [],
+  detail:{}
 };
 
 const reducer = function (state = initialState, action) {
@@ -17,18 +19,23 @@ const reducer = function (state = initialState, action) {
         countries: action.payload,
       };
     }
+    case GET_DETAIL:{
+      return {
+        ...state,
+        detail:action.payload
+      }
+    }
     case ADD_COUNTRY_FAVORITE: {
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: state.favorites.concat(action.payload)
+        //favorites: [...state.favorites, action.payload]
       };
     }
     case REMOVE_COUNTRY_FAVORITE: {
       return {
         ...state,
-        favorites: state.favorites.filter(
-          (el) => el.alpha3Code !== action.payload
-        ),
+        favorites: state.favorites.filter(e => e.alpha3Code !== action.payload)
       };
     }
     default: {

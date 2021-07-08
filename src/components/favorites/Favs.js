@@ -6,32 +6,27 @@ function Favs(props) {
   return (
     <div>
       <h1>Favorites</h1>
-      {props.favorites &&
-        props.favorites.map((el) => {
-          return (
-            <div>
-              <h4>{el.name}</h4>
-              <button
-                onClick={() => props.removeCountryFavorite(el.alpha3Code)}
-              >
-                X
-              </button>
-            </div>
-          );
-        })}
+      {props.favs ? props.favs.map(e =>{
+        return(
+          <div>
+          <button onClick={() => props.removeCountryFavorite(e.alpha3Code)}>X</button>
+          <h3>{e.name}</h3>
+          </div>
+        )
+      }) : null} 
     </div>
   );
 }
 
 function mapStateToProps(state) {
   return {
-    favorites: state.favorites,
+    favs:state.favorites
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    removeCountryFavorite: (id) => dispatch(removeCountryFavorite(id)),
+    removeCountryFavorite: id => dispatch(removeCountryFavorite(id))
   };
 }
 

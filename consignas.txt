@@ -1,11 +1,9 @@
 
 Crear una pagina que al hacer click en un boton traiga una lista con todos los paises
 
-Que al hacer click en el nombre redireccione a la ruta de detalle de ese pais
+Que al hacer click en el nombre lo agregue a favoritos
 
 Link api listado paises
 https://restcountries.eu/rest/v2/all
 
-Link api detalle por id ej Argentina (id: ARG)
-
-https://restcountries.eu/rest/v2/alpha/Arg
+hacer un botton que pueda agregar al pais a favs
